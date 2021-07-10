@@ -4,7 +4,12 @@ import 'package:get/get.dart';
 import 'package:shopx/controllers/product_controller.dart';
 import 'package:shopx/views/product_tile.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   ProductController productController = Get.put(ProductController());
 
   @override

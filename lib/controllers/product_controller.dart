@@ -8,8 +8,8 @@ class ProductController extends GetxController {
   List<Product> productList = List<Product>().obs;
 
   @override
-  void onInit() {
-    fetchProducts();
+  void onInit() async {
+    this.productList = await fetchProducts();
     super.onInit();
   }
 
@@ -17,7 +17,7 @@ class ProductController extends GetxController {
     List<Product> products;
     // Queries
     try {
-      products = await RemoteServices.fetchProducts();
+      return await RemoteServices.fetchProducts();
     } catch (e) {
       Get.snackbar("Error!", e.toString());
     }
