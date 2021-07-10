@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:shopx/controllers/product_controller.dart';
 import 'package:shopx/views/home_screen.dart';
 
 void main() {
+  Get.put(ProductController());
   runApp(MyApp());
 }
 

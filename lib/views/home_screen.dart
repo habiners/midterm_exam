@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
-import 'package:shopx/controllers/product_controller.dart';
-import 'package:shopx/helpers/showload.dart';
+import 'package:shopx/constants/constants.dart';
 import 'package:shopx/views/product_tile.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -11,8 +10,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  ProductController productController = Get.put(ProductController());
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,10 +56,10 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Obx(
             () {
-              return Expanded(
-                child: productController.productList.length == 0
-                    ? CircularProgressIndicator.adaptive() // show loader
-                    : StaggeredGridView.countBuilder(
+              return productController.productList.length == 0
+                  ? CircularProgressIndicator() // show loader
+                  : Expanded(
+                      child: StaggeredGridView.countBuilder(
                         crossAxisCount: 2,
                         itemCount: productController.productList.length,
                         crossAxisSpacing: 16,
@@ -72,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                         staggeredTileBuilder: (index) => StaggeredTile.fit(1),
                       ),
-              );
+                    );
             },
           )
         ],

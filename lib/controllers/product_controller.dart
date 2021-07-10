@@ -4,13 +4,15 @@ import 'package:shopx/services/remote_services.dart';
 import 'package:get/get.dart';
 
 class ProductController extends GetxController {
+  static ProductController instance = Get.find();
+
   var isLoading = true.obs;
   List<Product> productList = List<Product>().obs;
 
   @override
   void onInit() async {
-    this.productList = await fetchProducts();
     super.onInit();
+    this.productList = await fetchProducts();
   }
 
   Future<List<Product>> fetchProducts() async {
