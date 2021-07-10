@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:shopx/controllers/product_controller.dart';
+import 'package:shopx/helpers/showload.dart';
 import 'package:shopx/views/product_tile.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -56,17 +57,23 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
           ),
-          Expanded(
-            child: StaggeredGridView.countBuilder(
-              crossAxisCount: 2,
-              itemCount: productController.productList.length,
-              crossAxisSpacing: 16,
-              mainAxisSpacing: 16,
-              itemBuilder: (context, index) {
-                return ProductTile(product: productController.productList[index]);
-              },
-              staggeredTileBuilder: (index) => StaggeredTile.fit(1),
-            ),
+          Obx(
+            () {
+              return Expanded(
+                child: productController.productList.length == 0
+                    ? CircularProgressIndicator.adaptive() // show loader
+                    : StaggeredGridView.countBuilder(
+                        crossAxisCount: 2,
+                        itemCount: productController.productList.length,
+                        crossAxisSpacing: 16,
+                        mainAxisSpacing: 16,
+                        itemBuilder: (context, index) {
+                          return ProductTile(product: productController.productList[index]);
+                        },
+                        staggeredTileBuilder: (index) => StaggeredTile.fit(1),
+                      ),
+              );
+            },
           )
         ],
       ),
