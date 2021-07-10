@@ -38,8 +38,6 @@ class ProductTile extends StatelessWidget {
                         icon: product.isFavorite.value ? Icon(Icons.favorite_rounded) : Icon(Icons.favorite_border),
                         onPressed: () {
                           product.isFavorite.value = !product.isFavorite.value;
-                          print(product.isFavorite.value);
-                          // product.isFavorite.toggle();
                         },
                       ),
                     ),

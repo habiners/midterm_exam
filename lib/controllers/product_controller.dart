@@ -10,8 +10,8 @@ class ProductController extends GetxController {
   List<Product> productList = <Product>[].obs;
 
   @override
-  void onInit() async {
-    super.onInit();
+  void onReady() async {
+    super.onReady();
     this.productList = await fetchProducts();
     this.isLoading.value = false;
   }
