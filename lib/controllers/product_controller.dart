@@ -6,22 +6,23 @@ import 'package:get/get.dart';
 class ProductController extends GetxController {
   static ProductController instance = Get.find();
 
-  var isLoading = true.obs;
-  List<Product> productList = List<Product>().obs;
+  RxBool isLoading = true.obs;
+  List<Product> productList = <Product>[].obs;
 
   @override
   void onInit() async {
     super.onInit();
     this.productList = await fetchProducts();
+    this.isLoading.value = false;
   }
 
   Future<List<Product>> fetchProducts() async {
-    List<Product> products;
-    // Queries
+    List<Product> products = [];
     try {
       return await RemoteServices.fetchProducts();
     } catch (e) {
-      Get.snackbar("Error!", e.toString());
+      print(e.toString());
+      Get.snackbar("Error querying for products!", e.toString(), snackPosition: SnackPosition.BOTTOM);
     }
     return products;
   }

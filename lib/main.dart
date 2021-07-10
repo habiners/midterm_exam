@@ -4,6 +4,7 @@ import 'package:shopx/controllers/product_controller.dart';
 import 'package:shopx/views/home_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   Get.put(ProductController());
   runApp(MyApp());
 }

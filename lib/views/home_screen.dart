@@ -56,19 +56,26 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           Obx(
             () {
-              return productController.productList.length == 0
-                  ? CircularProgressIndicator() // show loader
+              return productController.isLoading.value
+                  ? Container(
+                      margin: EdgeInsets.only(top: 80.0),
+                      height: MediaQuery.of(context).size.width * .6,
+                      width: MediaQuery.of(context).size.width * .6,
+                      child: CircularProgressIndicator(),
+                    )
                   : Expanded(
-                      child: StaggeredGridView.countBuilder(
-                        crossAxisCount: 2,
-                        itemCount: productController.productList.length,
-                        crossAxisSpacing: 16,
-                        mainAxisSpacing: 16,
-                        itemBuilder: (context, index) {
-                          return ProductTile(product: productController.productList[index]);
-                        },
-                        staggeredTileBuilder: (index) => StaggeredTile.fit(1),
-                      ),
+                      child: productController.productList.isEmpty
+                          ? Text("Product list is empty!")
+                          : StaggeredGridView.countBuilder(
+                              crossAxisCount: 2,
+                              itemCount: productController.productList.length,
+                              crossAxisSpacing: 16,
+                              mainAxisSpacing: 16,
+                              itemBuilder: (context, index) {
+                                return ProductTile(product: productController.productList[index]);
+                              },
+                              staggeredTileBuilder: (index) => StaggeredTile.fit(1),
+                            ),
                     );
             },
           )
