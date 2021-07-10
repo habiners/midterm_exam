@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:shopx/models/product.dart';
 
 class ProductTile extends StatelessWidget {
+  ProductTile({@required this.product});
   final Product product;
 
   @override
@@ -33,9 +34,7 @@ class ProductTile extends StatelessWidget {
                   child: CircleAvatar(
                     backgroundColor: Colors.white,
                     child: IconButton(
-                      icon: product.isFavorite.value
-                          ? Icon(Icons.favorite_rounded)
-                          : Icon(Icons.favorite_border),
+                      icon: product.isFavorite.value ? Icon(Icons.favorite_rounded) : Icon(Icons.favorite_border),
                       onPressed: () {
                         product.isFavorite.toggle();
                       },
@@ -48,8 +47,7 @@ class ProductTile extends StatelessWidget {
             Text(
               product.name,
               maxLines: 2,
-              style:
-                  TextStyle(fontFamily: 'avenir', fontWeight: FontWeight.w800),
+              style: TextStyle(fontFamily: 'avenir', fontWeight: FontWeight.w800),
               overflow: TextOverflow.ellipsis,
             ),
             SizedBox(height: 8),

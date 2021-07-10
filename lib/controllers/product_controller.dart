@@ -1,10 +1,11 @@
 import 'package:get/state_manager.dart';
 import 'package:shopx/models/product.dart';
 import 'package:shopx/services/remote_services.dart';
+import 'package:get/get.dart';
 
 class ProductController extends GetxController {
   var isLoading = true.obs;
-  var productList = List<Product>().obs;
+  List<Product> productList = List<Product>().obs;
 
   @override
   void onInit() {
@@ -12,5 +13,14 @@ class ProductController extends GetxController {
     super.onInit();
   }
 
-  void fetchProducts() async {}
+  Future<List<Product>> fetchProducts() async {
+    List<Product> products;
+    // Queries
+    try {
+      products = await RemoteServices.fetchProducts();
+    } catch (e) {
+      Get.snackbar("Error!", e.toString());
+    }
+    return products;
+  }
 }
